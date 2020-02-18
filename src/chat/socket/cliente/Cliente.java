@@ -13,7 +13,6 @@ public class Cliente {
     MarcoClienteChat mimarco = new MarcoClienteChat();
     mimarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
-
 }
 
 class LaminaClienteChat extends JPanel {
