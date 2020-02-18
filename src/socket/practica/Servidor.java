@@ -1,4 +1,4 @@
-package chat.socket.servidor;
+package socket.practica;
 
 import java.awt.*;
 import java.io.DataInputStream;
@@ -7,7 +7,7 @@ import java.net.*;
 
 import javax.swing.*;
 
-public class ServidorChat {
+public class Servidor {
 
   public static void main(String[] args) {
     MarcoServidorChat mimarco = new MarcoServidorChat();
