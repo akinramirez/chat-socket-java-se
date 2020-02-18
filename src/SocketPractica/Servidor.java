@@ -1,4 +1,4 @@
-package chat.socket.servidor;
+package SocketPractica;
 
 import java.awt.*;
 import java.io.DataInputStream;

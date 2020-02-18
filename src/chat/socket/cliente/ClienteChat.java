@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import javax.swing.*;
 
-public class Cliente {
+public class ClienteChat {
 
   public static void main(String[] args) {
     MarcoClienteChat mimarco = new MarcoClienteChat();
@@ -17,12 +17,19 @@ public class Cliente {
 
 class LaminaClienteChat extends JPanel {
 
-  private JTextField campo1;
+  private JTextField campo1, nick, ip;
   private JButton miboton;
+  private JTextArea areaChat;
 
   public LaminaClienteChat() {
-    JLabel cliente = new JLabel("CLIENTE");
+    nick = new JTextField(5);
+    add(nick);
+    JLabel cliente = new JLabel("-- CHAT --");
     add(cliente);
+    ip = new JTextField(8);
+    add(ip);
+    areaChat = new JTextArea(12, 20);
+    add(areaChat);
     campo1 = new JTextField(20);
     add(campo1);
     miboton = new JButton("Enviar");
@@ -30,21 +37,19 @@ class LaminaClienteChat extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         //System.out.println(campo1.getText());
-        
+
         try {
           // Creacion de Socket (Via de comunicacion)
-          Socket miSocket = new Socket("192.168.0.6",9999);
+          Socket miSocket = new Socket("192.168.0.6", 9999);
+          EnvioPaqueteDatos datos = new EnvioPaqueteDatos();
+          datos.setNick(nick.getText());
+          datos.setIp(ip.getText());
+          datos.setTextoCliente(campo1.getText());          
           
-          //Creacion del flujo de datos
-          DataOutputStream flujoSalida = new DataOutputStream(miSocket.getOutputStream());
-          
-          //Enviar string del textbox al server
-          flujoSalida.writeUTF(campo1.getText());
-          flujoSalida.close();
-          
+
         } catch (IOException ex) {
           ex.printStackTrace();
-        }        
+        }
       }
     });
     add(miboton);
@@ -58,6 +63,35 @@ class MarcoClienteChat extends JFrame {
     LaminaClienteChat milamina = new LaminaClienteChat();
     add(milamina);
     setVisible(true);
+  }
+}
+
+class EnvioPaqueteDatos {
+
+  private String nick, ip, textoCliente;
+
+  public String getNick() {
+    return nick;
+  }
+
+  public void setNick(String nick) {
+    this.nick = nick;
+  }
+
+  public String getIp() {
+    return ip;
+  }
+
+  public void setIp(String ip) {
+    this.ip = ip;
+  }
+
+  public String getTextoCliente() {
+    return textoCliente;
+  }
+
+  public void setTextoCliente(String textoCliente) {
+    this.textoCliente = textoCliente;
   }
 
 }
