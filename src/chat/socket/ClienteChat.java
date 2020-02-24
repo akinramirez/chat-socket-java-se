@@ -36,7 +36,9 @@ class LaminaClienteChat extends JPanel implements Runnable {
     JLabel cliente = new JLabel(" ONLINE: ");
     add(cliente);
     ip = new JComboBox();
-    //ip.addItem("192.168.0.6");
+    /*ip.addItem("192.168.0.6");
+    ip.addItem("192.168.0.21");
+    ip.addItem("192.168.0.22");*/
     add(ip);
     areaChat = new JTextArea(12, 20);
     add(areaChat);
@@ -121,6 +123,8 @@ class MarcoClienteChat extends JFrame {
       datos.setTextoCliente("ONLINE");
       ObjectOutputStream flujoSalidaPaquete = new ObjectOutputStream(miSocket.getOutputStream());
       flujoSalidaPaquete.writeObject(datos);
+      flujoSalidaPaquete.close();
+      miSocket.close();
     } catch (IOException ex) {
       ex.printStackTrace();
     }
